@@ -27,7 +27,7 @@ class ChapterAdapter(private val context: Context, private val chapters: ArrayLi
 
     inner class CustomViewHolder(private val itemBinding: SingleChapterBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(chapter: Chapter){
-            itemBinding.tvChapterName.setText(chapter.chapterName)
+            itemBinding.tvChapterName.text = chapter.chapterName
             Picasso.get().load(chapter.imageUrl).into(itemBinding.ivChapter)
         }
 
