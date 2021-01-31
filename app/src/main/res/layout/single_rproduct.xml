@@ -11,7 +11,8 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardCornerRadius="4dp">
+        android:background="@color/white"
+        card_view:cardCornerRadius="6dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -20,14 +21,15 @@
             android:layout_margin="2dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="80dp"
+                android:layout_width="130dp"
+                android:layout_height="90dp"
                 android:id="@+id/ivChapter"
                 android:layout_margin="10dp" />
 
             <TextView
                 android:id="@+id/tvChapterName"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="10dp"
