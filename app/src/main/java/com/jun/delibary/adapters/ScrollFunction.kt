@@ -31,7 +31,7 @@ fun ViewPager2.infiniteScroll(mainSlide: ArrayList<MainSlideProduct>, itemBindin
             else
                 itemBinding.tvNum.text=(position).toString()
             //자동스크롤 값 플러스
-            RecentlyProductAdapter.scrollPosition = position + 1
+            HomeAdapter.scrollPosition = position + 1
         }
     })
 }
@@ -41,7 +41,7 @@ fun ViewPager2.autoScroll(mainSlide: ArrayList<MainSlideProduct>):Unit{
     val runnable = object : Runnable {
         override fun run() {
             val count = mainSlide.size
-            setCurrentItem(RecentlyProductAdapter.scrollPosition++ % count, true)
+            setCurrentItem(HomeAdapter.scrollPosition++ % count, true)
             handler.postDelayed(this, 3000)
         }
     }

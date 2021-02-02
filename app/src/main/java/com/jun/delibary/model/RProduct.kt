@@ -1,5 +1,5 @@
 package com.jun.delibary.model
 
-data class RProduct(var id:Int, var chapterName:String, var imageUrl:String) {
+data class RProduct(var id:String, var chapterName:String, var imageUrl:Int) {
 
 }

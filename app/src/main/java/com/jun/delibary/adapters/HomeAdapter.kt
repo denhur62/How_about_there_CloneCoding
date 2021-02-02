@@ -1,22 +1,25 @@
 package com.jun.delibary.adapters
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.jun.delibary.EventActivity
+import com.jun.delibary.adapters.RecyclerViewType.ICON_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.SLIDE_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.TEXT_TYPE
 import com.jun.delibary.databinding.*
 import com.jun.delibary.model.BannerText
+import com.jun.delibary.model.IconProduct
 import com.jun.delibary.model.MainSlide
 import com.jun.delibary.model.RecentlyProduct
 import java.util.*
 
-class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val context: Context) :
+class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
@@ -33,6 +36,10 @@ class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val c
             TEXT_TYPE-> {
                 val itemBinding= MainBennerBinding.inflate(LayoutInflater.from(parent.context),parent,false)
                 BannerNameViewHolder(itemBinding)
+            }
+            ICON_TYPE-> {
+                val itemBinding= SingleIconProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                IconViewHodler(itemBinding)
             }
             else -> throw RuntimeException("View Error")
         }
@@ -54,16 +61,19 @@ class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val c
             is BannerText->{
                 (holder as BannerNameViewHolder).bind(obj as BannerText)
             }
+            is IconProduct ->{
+                (holder as IconViewHodler).bind(obj as IconProduct)
+            }
             else -> throw RuntimeException("Bind Error")
         }
     }
     override fun getItemViewType(position: Int): Int {
 
-        Log.d("response","${itemList[position]}")
         return when(itemList[position]){
             is RecentlyProduct -> RECENTLY_PRODUCT_TYPE
             is MainSlide -> SLIDE_TYPE
             is BannerText -> TEXT_TYPE
+            is IconProduct -> ICON_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -86,7 +96,9 @@ class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val c
 
         fun bind(mainSlide: MainSlide){
             itemBinding.tvAll.setOnClickListener{
-                Toast.makeText(context, "전체보기", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, EventActivity::class.java)
+                intent.putExtra("eventAll","전체보기")
+                context.startActivity(intent)
                 }
 
             itemBinding.mainViewPager.run{
@@ -98,7 +110,9 @@ class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val c
 
                 adapter = mainSlide.list.let { MainSliderAdapter(context, it){
                     MainSlideProduct,position->
-                    Toast.makeText(context, "${MainSlideProduct},${position}", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(context, EventActivity::class.java)
+                    intent.putExtra("slideEvent","$position")
+                    context.startActivity(intent)
                 } }
             }
         }
@@ -107,6 +121,16 @@ class RecentlyProductAdapter(private val itemList: ArrayList<Any>, private val c
     inner class BannerNameViewHolder(private val itemBinding: MainBennerBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(bannerText: BannerText){
             itemBinding.toolbarText.text=bannerText.name
+        }
+    }
+    inner class IconViewHodler(private val itemBinding: SingleIconProductBinding): RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(iconProduct: IconProduct){
+            itemBinding.rvIcon.run{
+                setHasFixedSize(true)
+                adapter = iconProduct.IProducts.let { IProductAdapter(context, it) }
+                layoutManager = GridLayoutManager(context,4)
+                   
+            }
         }
     }
     companion object{

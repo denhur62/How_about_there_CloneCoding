@@ -10,7 +10,7 @@
         android:id="@+id/image_slide_icon"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:scaleType="center"
+        android:scaleType="fitXY"
         android:visibility="visible" />
 
 </LinearLayout>

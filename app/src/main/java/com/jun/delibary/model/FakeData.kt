@@ -20,21 +20,26 @@ import java.util.ArrayList
 
     anyProducts.add(slideList)
 
+     val iconList=IconProduct(arrayListOf(IProduct(R.drawable.a,"블랙"),
+         IProduct(R.drawable.b,"모텔"),IProduct(R.drawable.c,"호텔"),
+         IProduct(R.drawable.d,"리조트"),IProduct(R.drawable.e,"펜션 풀빌라"),
+         IProduct(R.drawable.f,"캠핑 글램핑"),IProduct(R.drawable.g,"게하 한옥"),
+         IProduct(R.drawable.h,"엑티비티"),IProduct(R.drawable.i,"테마 모텔"),
+         IProduct(R.drawable.j,"겨울호캉스"),IProduct(R.drawable.k,"숙박대상"),
+         IProduct(R.drawable.l,"망고플레이트")))
 
-    val chapterList1= ArrayList<RProduct>()
-    val chapter1 = RProduct(1,"동암 베네","http://ashishkudale.com/images/phy/atoms.png")
-    val chapter2 = RProduct(2,"동암 고추잠자리","http://ashishkudale.com/images/phy/sigma.png")
-    val chapter3 = RProduct(3,"파주 오블라디 풀빌라","http://ashishkudale.com/images/phy/magnet.png")
-    val chapter4 = RProduct(4,"세인트존스 호텔","http://ashishkudale.com/images/phy/caliper.png")
-    val chapter5 = RProduct(5,"[특가] 호텔 JCS 여수","http://ashishkudale.com/images/phy/micrometer.png")
-    chapterList1.add(chapter1)
-    chapterList1.add(chapter2)
-    chapterList1.add(chapter3)
-    chapterList1.add(chapter4)
-    chapterList1.add(chapter5)
-    val physics = RecentlyProduct("최근 본 상품",chapterList1)
+     anyProducts.add(iconList)
+
+    val chapterList= RecentlyProduct("최근 본 상품",arrayListOf<RProduct>(
+        RProduct("숙소","동암 베네",R.drawable.c1),
+        RProduct("숙소","동암 고추잠자리",R.drawable.c2),
+        RProduct("숙소","파주 오블라디 풀빌라",R.drawable.c3),
+        RProduct("숙소","세인트존스 호텔",R.drawable.c4),
+        RProduct("숙소","[특가] 호텔 JCS 여수",R.drawable.c5),
+        RProduct("숙소","간석 호텔버스",R.drawable.c6)
+    ))
+     anyProducts.add(chapterList)
 
 
-    anyProducts.add(physics)
-    return anyProducts
+     return anyProducts
 }
