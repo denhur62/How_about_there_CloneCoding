@@ -17,12 +17,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         dataBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(dataBinding.root)
-
         var subjects = prepareData()
         Log.d("response","$subjects")
-        val manager = LinearLayoutManager(this@MainActivity)
+        val manager = LinearLayoutManager(this)
 
-        recentlyProductAdapter = HomeAdapter( subjects,this@MainActivity)
+        recentlyProductAdapter = HomeAdapter( subjects,this,dataBinding.rvSubject)
+
 
         dataBinding.rvSubject.apply{
             layoutManager = manager

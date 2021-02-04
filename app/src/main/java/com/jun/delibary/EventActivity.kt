@@ -18,6 +18,10 @@ class EventActivity : AppCompatActivity(){
         if(intent.hasExtra("slideEvent")){
             dataBinding.tvAddress.text=intent.getStringExtra("slideEvent")+"번째 이벤트"
         }
+        if(intent.hasExtra("recentlyEvent")){
+            dataBinding.tvAddress.text="번째 이벤트"
+            dataBinding.imageView2.setImageResource(intent.getStringExtra("recentlyEvent")!!.toInt())
+        }
         dataBinding.ivClose.setOnClickListener {
             finish()
         }

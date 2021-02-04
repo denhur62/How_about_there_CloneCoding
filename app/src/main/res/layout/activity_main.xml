@@ -8,12 +8,12 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSubject"

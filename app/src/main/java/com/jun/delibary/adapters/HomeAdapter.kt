@@ -3,23 +3,27 @@ package com.jun.delibary.adapters
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.jun.delibary.EventActivity
+import com.jun.delibary.R
+import com.jun.delibary.adapters.RecyclerViewType.COUPON_TYPE
+import com.jun.delibary.adapters.RecyclerViewType.EXPLAIN_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.ICON_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.SLIDE_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.TEXT_TYPE
 import com.jun.delibary.databinding.*
-import com.jun.delibary.model.BannerText
-import com.jun.delibary.model.IconProduct
-import com.jun.delibary.model.MainSlide
-import com.jun.delibary.model.RecentlyProduct
+import com.jun.delibary.model.*
 import java.util.*
 
-class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context) :
+class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context,private val recyclerView:RecyclerView) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
@@ -40,6 +44,14 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             ICON_TYPE-> {
                 val itemBinding= SingleIconProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
                 IconViewHodler(itemBinding)
+            }
+            COUPON_TYPE-> {
+                val itemBinding= SingleCouponProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                CouponViewHodler(itemBinding)
+            }
+            EXPLAIN_TYPE-> {
+                val itemBinding= CompanyExplainBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                CompanyViewHolder(itemBinding)
             }
             else -> throw RuntimeException("View Error")
         }
@@ -64,6 +76,12 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is IconProduct ->{
                 (holder as IconViewHodler).bind(obj as IconProduct)
             }
+            is CouponProduct ->{
+                (holder as CouponViewHodler).bind(obj as CouponProduct)
+            }
+            is CompanyProduct ->{
+                (holder as CompanyViewHolder).bind(obj as CompanyProduct)
+            }
             else -> throw RuntimeException("Bind Error")
         }
     }
@@ -74,6 +92,8 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is MainSlide -> SLIDE_TYPE
             is BannerText -> TEXT_TYPE
             is IconProduct -> ICON_TYPE
+            is CouponProduct -> COUPON_TYPE
+            is CompanyProduct -> EXPLAIN_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -82,7 +102,12 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             //아이템이 변경하지 않을것을 명시하여 성능하락 방지 == setHasFixedSize
             itemBinding.rvChapters.run{
                 setHasFixedSize(true)
-                adapter = recentlyProduct.RProducts.let { RProductAdapter(context, it) }
+                adapter = recentlyProduct.RProducts.let { RProductAdapter(context, it){
+                        RProduct->
+                    val intent = Intent(context, EventActivity::class.java)
+                    intent.putExtra("recentlyEvent","${RProduct.imageUrl}")
+                    context.startActivity(intent)
+                } }
                 layoutManager = LinearLayoutManager(
                         context,
                         LinearLayoutManager.HORIZONTAL,
@@ -130,6 +155,29 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 adapter = iconProduct.IProducts.let { IProductAdapter(context, it) }
                 layoutManager = GridLayoutManager(context,4)
                    
+            }
+        }
+    }
+    inner class CouponViewHodler(private val itemBinding: SingleCouponProductBinding): RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(couponProduct: CouponProduct){
+            itemBinding.ivCoupon.clipToOutline=true
+            Glide.with(context).load(couponProduct.imageUrl)
+                    .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+                    .into(itemBinding.ivCoupon)
+            }
+        }
+    inner class CompanyViewHolder(private val itemBinding: CompanyExplainBinding): RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(companyProduct: CompanyProduct) {
+            itemBinding.ivArrow.setOnClickListener {
+                if (itemBinding.llDetail.visibility == View.GONE) {
+                    itemBinding.llDetail.expand(recyclerView)
+                    itemBinding.tvSeeDetail.text = "닫기"
+                    itemBinding.ivArrow.setImageResource(R.drawable.arrow_up)
+                } else { //VISIBLE
+                    itemBinding.llDetail.collapse()
+                    itemBinding.tvSeeDetail.text = "자세히보기"
+                    itemBinding.ivArrow.setImageResource(R.drawable.arrow_down)
+                }
             }
         }
     }

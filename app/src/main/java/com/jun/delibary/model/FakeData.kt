@@ -29,6 +29,8 @@ import java.util.ArrayList
          IProduct(R.drawable.l,"망고플레이트")))
 
      anyProducts.add(iconList)
+     val couponProduct=CouponProduct(R.drawable.coupon)
+     anyProducts.add(couponProduct)
 
     val chapterList= RecentlyProduct("최근 본 상품",arrayListOf<RProduct>(
         RProduct("숙소","동암 베네",R.drawable.c1),
@@ -40,6 +42,6 @@ import java.util.ArrayList
     ))
      anyProducts.add(chapterList)
 
-
+    anyProducts.add(CompanyProduct(1))
      return anyProducts
 }

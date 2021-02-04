@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="jalnan">#F7323F</color>
+    <color name="explain">#EEEEEE</color>
     <color name="gray">#bdbdbd</color>
 </resources>

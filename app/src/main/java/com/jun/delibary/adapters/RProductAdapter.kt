@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.jun.delibary.databinding.SingleRproductBinding
 import com.jun.delibary.model.RProduct
 import java.util.*
 
-class RProductAdapter(private val context: Context, private val RProducts: ArrayList<RProduct>) :
+
+class RProductAdapter(private val context: Context, private val RProducts: ArrayList<RProduct>, private val itemClick: (RProduct) -> Unit) :
     RecyclerView.Adapter<RProductAdapter.RProductViewHolder?>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RProductViewHolder {
-        val itemBinding=SingleRproductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val itemBinding=SingleRproductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RProductViewHolder(itemBinding)
 
     }
@@ -30,7 +34,12 @@ class RProductAdapter(private val context: Context, private val RProducts: Array
             itemBinding.tvId.text=RProduct.id
             itemBinding.tvChapterName.text = RProduct.chapterName
             itemBinding.ivChapter.clipToOutline=true
-            Glide.with(context).load(RProduct.imageUrl).into(itemBinding.ivChapter)
+            Glide.with(context)
+                    .load(RProduct.imageUrl)
+                    .into(itemBinding.ivChapter)
+            itemBinding.llRproduct.setOnClickListener {
+                itemClick(RProduct)
+            }
         }
 
     }
