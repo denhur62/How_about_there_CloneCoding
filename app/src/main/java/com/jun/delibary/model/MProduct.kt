@@ -1,4 +1,4 @@
 package com.jun.delibary.model
 
-class MProduct {
+class MProduct(val imageUrl:Int) {
 }

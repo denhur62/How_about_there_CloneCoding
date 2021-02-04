@@ -16,6 +16,7 @@ import com.jun.delibary.R
 import com.jun.delibary.adapters.RecyclerViewType.COUPON_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.EXPLAIN_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.ICON_TYPE
+import com.jun.delibary.adapters.RecyclerViewType.MAGAZINE_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.SLIDE_TYPE
 import com.jun.delibary.adapters.RecyclerViewType.TEXT_TYPE
@@ -53,6 +54,10 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 val itemBinding= CompanyExplainBinding.inflate(LayoutInflater.from(parent.context),parent,false)
                 CompanyViewHolder(itemBinding)
             }
+            MAGAZINE_TYPE -> {
+                val itemBinding= SingleMagazineProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                MagazineViewHolder(itemBinding)
+            }
             else -> throw RuntimeException("View Error")
         }
 
@@ -82,6 +87,9 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is CompanyProduct ->{
                 (holder as CompanyViewHolder).bind(obj as CompanyProduct)
             }
+            is MagazineProduct ->{
+                (holder as MagazineViewHolder).bind(obj as MagazineProduct)
+            }
             else -> throw RuntimeException("Bind Error")
         }
     }
@@ -94,6 +102,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is IconProduct -> ICON_TYPE
             is CouponProduct -> COUPON_TYPE
             is CompanyProduct -> EXPLAIN_TYPE
+            is MagazineProduct -> MAGAZINE_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -115,6 +124,20 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 )
             }
             itemBinding.tvSubjectName.text = recentlyProduct.subjectName
+        }
+    }
+    inner class MagazineViewHolder(private val itemBinding: SingleMagazineProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(magazineProduct: MagazineProduct){
+            itemBinding.rvIcon.run{
+                setHasFixedSize(true)
+                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it)}
+                layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
+            }
+            itemBinding.tvSubjectName.text = magazineProduct.subjectName
         }
     }
     inner class MainSliderViewHolder(private val itemBinding: SingleSlideBinding): RecyclerView.ViewHolder(itemBinding.root){

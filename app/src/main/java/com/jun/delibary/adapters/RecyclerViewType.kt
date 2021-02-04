@@ -7,6 +7,7 @@ object RecyclerViewType {
     const val COUPON_TYPE=3
     const val RECENTLY_PRODUCT_TYPE=4
     const val EXPLAIN_TYPE=5
-    const val LIGHTNING_PRODUCT_TYPE=5
+    const val MAGAZINE_TYPE=6
+    const val LIGHTNING_PRODUCT_TYPE=7
 
 }

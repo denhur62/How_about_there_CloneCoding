@@ -42,6 +42,16 @@ import java.util.ArrayList
     ))
      anyProducts.add(chapterList)
 
+     val magazineList= MagazineProduct("여행 매거진",arrayListOf<MProduct>(
+             MProduct(R.drawable.m1),
+             MProduct(R.drawable.m2),
+             MProduct(R.drawable.m3),
+             MProduct(R.drawable.m4),
+             MProduct(R.drawable.m5),
+             MProduct(R.drawable.m6)
+     ))
+     anyProducts.add(magazineList)
+
     anyProducts.add(CompanyProduct(1))
      return anyProducts
 }
