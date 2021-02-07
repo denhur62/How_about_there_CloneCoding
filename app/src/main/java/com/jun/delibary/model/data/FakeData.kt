@@ -59,8 +59,21 @@ import java.util.ArrayList
          SPProduct(R.drawable.sp4,"경주 황남관 한옥호텔","경주역 차량 6분","8.3","(254)","150,000","87,000원"),
          SPProduct(R.drawable.sp5,"하이오션 경포","경포해변 도보 3분","9.2","(119)","330,000","63,900원"),
      ))
-
      anyProducts.add(spList)
+
+     val reList=RecommendProduct(arrayListOf(
+         ReProduct(R.drawable.r1,"간석 파이호텔","1km","남동구 간석동","9.5","2,244",
+             "20,000원","35,000원","예약"),
+         ReProduct(R.drawable.r2,"간석 호텔버스","985m","남동구 간석동","9.5","432",
+             "20,000원","35,000원","예약특가","40,000"),
+         ReProduct(R.drawable.r3,"구월동 구월호텔","2,2km","남동구 구월동","9.5","3,993",
+             "25,000원","50,000원","예약"),
+         ReProduct(R.drawable.r4,"동암 베네","2.2km","부평구 십정동","9.3","2,760",
+             "18,000원","30,000원","예약"),
+         ReProduct(R.drawable.r5,"간석 골든호텔","1.3km","남동구 간석동","9.4","2,528",
+             "25,000원","50,000원","예약특가","60,000"),
+     ))
+     anyProducts.add(reList)
 
      val magazineList= MagazineProduct("여행 매거진",arrayListOf<MProduct>(
              MProduct(R.drawable.m1),
