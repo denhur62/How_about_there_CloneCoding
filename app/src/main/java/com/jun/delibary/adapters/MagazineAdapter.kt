@@ -1,6 +1,7 @@
 package com.jun.delibary.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ class MagazineAdapter(private val context: Context, private val MProducts: Array
 
     inner class MagazineViewHolder(private val itemBinding: SingleMproductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(mProduct: MProduct){
+            itemBinding.ivIcon.clipToOutline=true
             Glide.with(context)
                     .load(mProduct.imageUrl)
                     .into(itemBinding.ivIcon)
