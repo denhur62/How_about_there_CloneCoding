@@ -27,7 +27,10 @@ class MainSliderAdapter(private val context: Context, private val MainSlides: Ar
 
     inner class MainSliderViewHolder(private val itemBinding: SlideItemContainerBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(mainSlide : MainSlideProduct){
-            Glide.with(context).load(mainSlide.icon).fitCenter().into(itemBinding.imageSlideIcon)
+            Glide.with(context).load(mainSlide.icon)
+                .fitCenter()
+                .into(itemBinding.imageSlideIcon)
+
             itemBinding.imageSlideIcon.setOnClickListener {
                 itemClick(mainSlide,adapterPosition)
             }

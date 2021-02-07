@@ -2,6 +2,7 @@ package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -145,27 +146,32 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         }
     }
     inner class MainSliderViewHolder(private val itemBinding: SingleSlideBinding): RecyclerView.ViewHolder(itemBinding.root){
-
+        private var flag=true
         fun bind(mainSlide: MainSlide){
             itemBinding.tvAll.setOnClickListener{
                 val intent = Intent(context, EventActivity::class.java)
                 intent.putExtra("eventAll","전체보기")
                 context.startActivity(intent)
                 }
-
             itemBinding.mainViewPager.run{
-                autoScroll(mainSlide.list)
-                infiniteScroll(mainSlide.list,itemBinding)
-                // 기본값
-                setCurrentItem(1, false)
-                orientation=this.orientation
+                // if문을 사용하거나 Activity에서 설정
+                if(flag){
+                    flag=false
+                    autoScroll(mainSlide.list)
+                    infiniteScroll(mainSlide.list,itemBinding)
+                    // 기본값\
+                    setCurrentItem(1, false)
+                    orientation=this.orientation
 
-                adapter = mainSlide.list.let { MainSliderAdapter(context, it){
-                    MainSlideProduct,position->
-                    val intent = Intent(context, EventActivity::class.java)
-                    intent.putExtra("slideEvent","$position")
-                    context.startActivity(intent)
-                } }
+                    adapter = mainSlide.list.let { MainSliderAdapter(context, it){
+                            MainSlideProduct,position->
+                        val intent = Intent(context, EventActivity::class.java)
+                        intent.putExtra("slideEvent","$position")
+                        context.startActivity(intent)
+                    } }
+
+                }
+
             }
         }
     }

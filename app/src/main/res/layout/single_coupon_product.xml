@@ -13,7 +13,7 @@
             android:layout_width="350dp"
             android:layout_height="140dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/rectangle_radius_stroke"
+            android:background="@drawable/coupon_stroke"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
