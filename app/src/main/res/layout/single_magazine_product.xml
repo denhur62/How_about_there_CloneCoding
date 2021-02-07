@@ -15,7 +15,7 @@
         android:background="#FFFFFF">
 
         <TextView
-            android:id="@+id/tvSubjectName"
+            android:id="@+id/tv_subject_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -23,7 +23,7 @@
             android:layout_marginStart="18dp"
             android:textColor="#000000"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/constraint_layout"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread_inside"/>
 
@@ -37,7 +37,7 @@
             android:text="전체 보기"
             android:textColor="@color/teal_700"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/rvChapters"
+            app:layout_constraintBottom_toTopOf="@+id/rv_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/constraint_layout" />
 
@@ -46,7 +46,7 @@
             android:layout_marginStart="12dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubjectName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_subject_name"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,8 @@ import com.jun.delibary.model.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.SLIDE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.TEXT_TYPE
 import com.jun.delibary.databinding.*
-import com.jun.delibary.model.*
+import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_THREE_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.SPECIAL_PRODUCT_TYPE
 import com.jun.delibary.model.data.*
 import java.util.*
 
@@ -51,13 +52,21 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 val itemBinding= SingleCouponProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
                 CouponViewHodler(itemBinding)
             }
-            EXPLAIN_TYPE-> {
-                val itemBinding= CompanyExplainBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-                CompanyViewHolder(itemBinding)
+            COUPON_THREE_TYPE ->{
+                val itemBinding= ThreeCouponProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                ThreeCouponViewHodler(itemBinding)
+            }
+            SPECIAL_PRODUCT_TYPE->{
+                val itemBinding= SpecialPriceProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                SpecialPriceViewHolder(itemBinding)
             }
             MAGAZINE_TYPE -> {
                 val itemBinding= SingleMagazineProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
                 MagazineViewHolder(itemBinding)
+            }
+            EXPLAIN_TYPE-> {
+                val itemBinding= CompanyExplainBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                CompanyViewHolder(itemBinding)
             }
             else -> throw RuntimeException("View Error")
         }
@@ -91,6 +100,12 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is MagazineProduct ->{
                 (holder as MagazineViewHolder).bind(obj as MagazineProduct)
             }
+            is ThreeCouponProduct ->{
+                (holder as ThreeCouponViewHodler).bind()
+            }
+            is SpecialPriceProduct ->{
+                (holder as SpecialPriceViewHolder).bind(obj as SpecialPriceProduct)
+            }
             else -> throw RuntimeException("Bind Error")
         }
     }
@@ -104,6 +119,8 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is CouponProduct -> COUPON_TYPE
             is CompanyProduct -> EXPLAIN_TYPE
             is MagazineProduct -> MAGAZINE_TYPE
+            is ThreeCouponProduct -> COUPON_THREE_TYPE
+            is SpecialPriceProduct -> SPECIAL_PRODUCT_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -125,20 +142,6 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 )
             }
             itemBinding.tvSubjectName.text = recentlyProduct.subjectName
-        }
-    }
-    inner class MagazineViewHolder(private val itemBinding: SingleMagazineProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(magazineProduct: MagazineProduct){
-            itemBinding.rvIcon.run{
-                setHasFixedSize(true)
-                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it) }
-                layoutManager = LinearLayoutManager(
-                        context,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                )
-            }
-            itemBinding.tvSubjectName.text = magazineProduct.subjectName
         }
     }
     inner class MainSliderViewHolder(private val itemBinding: SingleSlideBinding): RecyclerView.ViewHolder(itemBinding.root){
@@ -184,12 +187,45 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
     }
     inner class CouponViewHodler(private val itemBinding: SingleCouponProductBinding): RecyclerView.ViewHolder(itemBinding.root){
         fun bind(couponProduct: CouponProduct){
-            itemBinding.ivCoupon.clipToOutline=true
             Glide.with(context).load(couponProduct.imageUrl)
                     .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
                     .into(itemBinding.ivCoupon)
             }
         }
+    inner class ThreeCouponViewHodler(private val itemBinding: ThreeCouponProductBinding): RecyclerView.ViewHolder(itemBinding.root){
+        fun bind(){
+            itemBinding.tc1.clipToOutline=true
+            itemBinding.tc2.clipToOutline=true
+            itemBinding.tc3.clipToOutline=true
+        }
+    }
+    inner class SpecialPriceViewHolder(private val itemBinding: SpecialPriceProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(spproduct: SpecialPriceProduct){
+            itemBinding.rvSpProduct.run{
+                setHasFixedSize(true)
+                adapter = spproduct.SPProducts.let { SPAdapter(context, it) }
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+        }
+    }
+    inner class MagazineViewHolder(private val itemBinding: SingleMagazineProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(magazineProduct: MagazineProduct){
+            itemBinding.rvIcon.run{
+                setHasFixedSize(true)
+                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it) }
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            }
+            itemBinding.tvSubjectName.text = magazineProduct.subjectName
+        }
+    }
     inner class CompanyViewHolder(private val itemBinding: CompanyExplainBinding): RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(companyProduct: CompanyProduct) {
             itemBinding.ivArrow.setOnClickListener {

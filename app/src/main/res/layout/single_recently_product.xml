@@ -15,7 +15,7 @@
         android:background="#FFFFFF">
 
         <TextView
-            android:id="@+id/tvSubjectName"
+            android:id="@+id/tv_subject_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -46,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvSubjectName"
+            app:layout_constraintTop_toBottomOf="@+id/tv_subject_name"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

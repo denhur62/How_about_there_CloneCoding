@@ -33,10 +33,13 @@ import java.util.ArrayList
      ))
 
      anyProducts.add(iconList)
-     val couponProduct= CouponProduct(R.drawable.coupon)
-     anyProducts.add(couponProduct)
 
-    val chapterList= RecentlyProduct("최근 본 상품",arrayListOf<RProduct>(
+     val couponProduct= CouponProduct(R.drawable.coupon)
+     val threeCouponProduct=ThreeCouponProduct(1)
+     anyProducts.add(couponProduct)
+     anyProducts.add(threeCouponProduct)
+
+     val chapterList= RecentlyProduct("최근 본 상품",arrayListOf<RProduct>(
         RProduct("숙소","동암 베네",R.drawable.c1),
         RProduct("숙소","동암 고추잠자리",R.drawable.c2),
         RProduct("숙소","파주 오블라디 풀빌라",R.drawable.c3),
@@ -45,6 +48,19 @@ import java.util.ArrayList
         RProduct("숙소","간석 호텔버스",R.drawable.c6)
     ))
      anyProducts.add(chapterList)
+
+     val couponProduct2= CouponProduct(R.drawable.coupon2)
+     anyProducts.add(couponProduct2)
+
+     val spList=SpecialPriceProduct(arrayListOf(
+         SPProduct(R.drawable.sp1,"호텔 리베라","청담역 도보 5분","9.1","(1731)","251,000","74,000원"),
+         SPProduct(R.drawable.sp2,"이비스 스타일 앰배서더 명동","명동역 도보 2분","8.9","(353)","150,000","53,000원"),
+         SPProduct(R.drawable.sp3,"호텔 피제이 명동","을지로4가역 5분","9.4","(947)","235,000","57,400원"),
+         SPProduct(R.drawable.sp4,"경주 황남관 한옥호텔","경주역 차량 6분","8.3","(254)","150,000","87,000원"),
+         SPProduct(R.drawable.sp5,"하이오션 경포","경포해변 도보 3분","9.2","(119)","330,000","63,900원"),
+     ))
+
+     anyProducts.add(spList)
 
      val magazineList= MagazineProduct("여행 매거진",arrayListOf<MProduct>(
              MProduct(R.drawable.m1),
