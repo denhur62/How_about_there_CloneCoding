@@ -1,4 +1,4 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jun.delibary.databinding.SlideItemContainerBinding
-import com.jun.delibary.model.MainSlide
-import com.jun.delibary.model.MainSlideProduct
+import com.jun.delibary.model.data.MainSlideProduct
 import java.util.ArrayList
 
-class MainSliderAdapter(private val context: Context, private val MainSlides: ArrayList<MainSlideProduct>,private val itemClick:(MainSlideProduct,Int)->Unit)
+class MainSliderAdapter(private val context: Context, private val MainSlides: ArrayList<MainSlideProduct>, private val itemClick:(MainSlideProduct, Int)->Unit)
     :RecyclerView.Adapter<MainSliderAdapter.MainSliderViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainSliderViewHolder {

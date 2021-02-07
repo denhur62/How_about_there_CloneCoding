@@ -1,4 +1,4 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 object RecyclerViewType {
     const val TEXT_TYPE=0

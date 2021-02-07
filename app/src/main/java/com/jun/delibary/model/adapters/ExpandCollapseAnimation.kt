@@ -1,4 +1,4 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.util.Log
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import androidx.recyclerview.widget.RecyclerView
-import com.jun.delibary.model.prepareData
+import com.jun.delibary.model.data.prepareData
 
 
 fun View.expand(scrollView: RecyclerView?=null) {

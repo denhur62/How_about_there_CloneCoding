@@ -1,4 +1,4 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.jun.delibary.EventActivity
+import com.jun.delibary.view.EventActivity
 import com.jun.delibary.R
-import com.jun.delibary.adapters.RecyclerViewType.COUPON_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.EXPLAIN_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.ICON_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.MAGAZINE_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.SLIDE_TYPE
-import com.jun.delibary.adapters.RecyclerViewType.TEXT_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.EXPLAIN_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.ICON_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.MAGAZINE_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.SLIDE_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.TEXT_TYPE
 import com.jun.delibary.databinding.*
 import com.jun.delibary.model.*
+import com.jun.delibary.model.data.*
 import java.util.*
 
 class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context,private val recyclerView:RecyclerView) :
@@ -75,7 +76,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is MainSlide -> {
                 (holder as MainSliderViewHolder).bind(obj as MainSlide)
             }
-            is BannerText->{
+            is BannerText ->{
                 (holder as BannerNameViewHolder).bind(obj as BannerText)
             }
             is IconProduct ->{
@@ -107,7 +108,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         }
     }
     inner class SingleViewHolder(private val itemBinding: SingleRecentlyProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(recentlyProduct:RecentlyProduct){
+        fun bind(recentlyProduct: RecentlyProduct){
             //아이템이 변경하지 않을것을 명시하여 성능하락 방지 == setHasFixedSize
             itemBinding.rvChapters.run{
                 setHasFixedSize(true)
@@ -130,7 +131,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         fun bind(magazineProduct: MagazineProduct){
             itemBinding.rvIcon.run{
                 setHasFixedSize(true)
-                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it)}
+                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it) }
                 layoutManager = LinearLayoutManager(
                         context,
                         LinearLayoutManager.HORIZONTAL,

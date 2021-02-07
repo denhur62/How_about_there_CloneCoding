@@ -1,4 +1,4 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jun.delibary.databinding.SingleIproductBinding
-import com.jun.delibary.model.IProduct
+import com.jun.delibary.model.data.IProduct
 import java.util.ArrayList
 
 class IProductAdapter (private val context: Context, private val IProducts: ArrayList<IProduct>) :
@@ -19,7 +19,7 @@ class IProductAdapter (private val context: Context, private val IProducts: Arra
 
     }
 
-    override fun onBindViewHolder(holder: IProductAdapter.IProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: IProductViewHolder, position: Int) {
         val IProduct: IProduct = IProducts[position]
         holder.bind(IProduct)
     }

@@ -1,13 +1,12 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jun.delibary.databinding.SingleMproductBinding
-import com.jun.delibary.model.MProduct
+import com.jun.delibary.model.data.MProduct
 import java.util.ArrayList
 
 class MagazineAdapter(private val context: Context, private val MProducts: ArrayList<MProduct> ) :

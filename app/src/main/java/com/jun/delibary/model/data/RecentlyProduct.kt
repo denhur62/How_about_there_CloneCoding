@@ -1,4 +1,4 @@
-package com.jun.delibary.model
+package com.jun.delibary.model.data
 
 import java.util.*
 

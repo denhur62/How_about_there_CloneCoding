@@ -1,14 +1,13 @@
-package com.jun.delibary
+package com.jun.delibary.view
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jun.delibary.adapters.HomeAdapter
+import com.jun.delibary.model.adapters.HomeAdapter
 import com.jun.delibary.databinding.ActivityMainBinding
 import com.jun.delibary.model.*
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import com.jun.delibary.model.data.prepareData
 
 class MainActivity : AppCompatActivity() {
     private var recentlyProductAdapter: HomeAdapter? = null

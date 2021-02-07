@@ -1,11 +1,10 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.os.Handler
 import android.os.Looper
 import androidx.viewpager2.widget.ViewPager2
 import com.jun.delibary.databinding.SingleSlideBinding
-import com.jun.delibary.model.MainSlide
-import com.jun.delibary.model.MainSlideProduct
+import com.jun.delibary.model.data.MainSlideProduct
 
 fun ViewPager2.infiniteScroll(mainSlide: ArrayList<MainSlideProduct>, itemBinding: SingleSlideBinding):Unit{
     registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {

@@ -1,15 +1,12 @@
-package com.jun.delibary.adapters
+package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.jun.delibary.databinding.SingleRproductBinding
-import com.jun.delibary.model.RProduct
+import com.jun.delibary.model.data.RProduct
 import java.util.*
 
 
