@@ -11,4 +11,5 @@
     <color name="explain">#EEEEEE</color>
     <color name="gray">#bdbdbd</color>
     <color name="lightyellow">#FFFFE0</color>
+    <color name="gray_black">#424242</color>
 </resources>

@@ -84,6 +84,14 @@ import java.util.ArrayList
              MProduct(R.drawable.m6)
      ))
      anyProducts.add(magazineList)
+     val blackList=BlackProduct(arrayListOf(
+             BLProduct(R.drawable.black1),
+             BLProduct(R.drawable.black1),
+             BLProduct(R.drawable.black2),
+             BLProduct(R.drawable.black3),
+             BLProduct(R.drawable.black4)
+     ))
+     anyProducts.add(blackList)
     val beliveList=BeliveProduct(arrayListOf(
             BProduct(R.drawable.b1,"발렌타인데이엔 초콜릿 대신 호캉스","달달한 혜택까지!","HOT","BEST"),
             BProduct(R.drawable.b2,"둘이서 알콩달콤 발렌타인데이 보내기❤","전국 인기 추천모텔만 모았어요!","쿠폰 할인","BEST"),

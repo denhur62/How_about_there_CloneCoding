@@ -2,10 +2,10 @@ package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.jun.delibary.R
 import com.jun.delibary.databinding.*
 import com.jun.delibary.model.adapters.RecyclerViewType.BELIVE_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.BLACK_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_THREE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.EXPLAIN_TYPE
@@ -32,7 +33,6 @@ import java.util.*
 
 class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context, private val recyclerView: RecyclerView) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
@@ -72,13 +72,17 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 val itemBinding = CompanyExplainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 CompanyViewHolder(itemBinding)
             }
-            RECOMMEND_PRODUCT_TYPE ->{
+            RECOMMEND_PRODUCT_TYPE -> {
                 val itemBinding = RecommendProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 RecommendViewHolder(itemBinding)
             }
             BELIVE_TYPE -> {
                 val itemBinding = BeliveProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 BeliveViewHolder(itemBinding)
+            }
+            BLACK_TYPE -> {
+                val itemBinding = BlackProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                BlackProductViewHolder(itemBinding)
             }
             else -> throw RuntimeException("View Error")
         }
@@ -118,11 +122,14 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is SpecialPriceProduct -> {
                 (holder as SpecialPriceViewHolder).bind(obj as SpecialPriceProduct)
             }
-            is RecommendProduct ->{
+            is RecommendProduct -> {
                 (holder as RecommendViewHolder).bind(obj as RecommendProduct)
             }
-            is BeliveProduct ->{
+            is BeliveProduct -> {
                 (holder as BeliveViewHolder).bind(obj as BeliveProduct)
+            }
+            is BlackProduct -> {
+                (holder as BlackProductViewHolder).bind(obj as BlackProduct)
             }
             else -> throw RuntimeException("Bind Error")
         }
@@ -141,6 +148,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is SpecialPriceProduct -> SPECIAL_PRODUCT_TYPE
             is RecommendProduct -> RECOMMEND_PRODUCT_TYPE
             is BeliveProduct -> BELIVE_TYPE
+            is BlackProduct -> BLACK_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -254,7 +262,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             itemBinding.bProduct.run{
                 setHasFixedSize(true)
                 adapter = BeliveAdapter(context, beliveProduct.bproducts)
-                layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             }
         }
     }
@@ -270,6 +278,33 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 )
             }
             itemBinding.tvSubjectName.text = magazineProduct.subjectName
+        }
+    }
+    inner class BlackProductViewHolder(private val itemBinding: BlackProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(blackProduct: BlackProduct){
+            itemBinding.rvBlack.run{
+                setHasFixedSize(true)
+                adapter = BlackAdapter(context, blackProduct.BlProducts)
+                layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
+
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    var overallXScroll: Float = 100f
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                        //use this value to determine left or right scroll
+                        overallXScroll += (dx*2)
+                        itemBinding.tvBlack1.alpha = (100 / overallXScroll)
+                        itemBinding.tvBlack2.alpha = (100 / overallXScroll)
+                        itemBinding.tvBlack3.alpha = (100 / overallXScroll)
+                        itemBinding.ivBlack.alpha = (100 / overallXScroll)
+                    }
+                })
+
+            }
         }
     }
     inner class CompanyViewHolder(private val itemBinding: CompanyExplainBinding): RecyclerView.ViewHolder(itemBinding.root) {
