@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.jun.delibary.R
 import com.jun.delibary.databinding.*
+import com.jun.delibary.model.adapters.RecyclerViewType.BELIVE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_THREE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.EXPLAIN_TYPE
@@ -37,7 +38,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         return when(viewType){
             RECENTLY_PRODUCT_TYPE -> {
                 val itemBinding = SingleRecentlyProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                SingleViewHolder(itemBinding)
+                RecentViewHolder(itemBinding)
             }
             SLIDE_TYPE -> {
                 val itemBinding = SingleSlideBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -75,6 +76,10 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 val itemBinding = RecommendProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 RecommendViewHolder(itemBinding)
             }
+            BELIVE_TYPE -> {
+                val itemBinding = BeliveProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                BeliveViewHolder(itemBinding)
+            }
             else -> throw RuntimeException("View Error")
         }
 
@@ -88,7 +93,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
 
         val obj = itemList[position]
         when (obj) {
-            is RecentlyProduct -> (holder as SingleViewHolder).bind(obj as RecentlyProduct)
+            is RecentlyProduct -> (holder as RecentViewHolder).bind(obj as RecentlyProduct)
             is MainSlide -> {
                 (holder as MainSliderViewHolder).bind(obj as MainSlide)
             }
@@ -116,6 +121,9 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is RecommendProduct ->{
                 (holder as RecommendViewHolder).bind(obj as RecommendProduct)
             }
+            is BeliveProduct ->{
+                (holder as BeliveViewHolder).bind(obj as BeliveProduct)
+            }
             else -> throw RuntimeException("Bind Error")
         }
     }
@@ -132,10 +140,11 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is ThreeCouponProduct -> COUPON_THREE_TYPE
             is SpecialPriceProduct -> SPECIAL_PRODUCT_TYPE
             is RecommendProduct -> RECOMMEND_PRODUCT_TYPE
+            is BeliveProduct -> BELIVE_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
-    inner class SingleViewHolder(private val itemBinding: SingleRecentlyProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    inner class RecentViewHolder(private val itemBinding: SingleRecentlyProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(recentlyProduct: RecentlyProduct){
             //아이템이 변경하지 않을것을 명시하여 성능하락 방지 == setHasFixedSize
             itemBinding.rvChapters.run{
@@ -213,6 +222,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             itemBinding.tc3.clipToOutline=true
         }
     }
+
     inner class SpecialPriceViewHolder(private val itemBinding: SpecialPriceProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(spproduct: SpecialPriceProduct){
             itemBinding.rvSpProduct.run{
@@ -236,6 +246,15 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                         LinearLayoutManager.HORIZONTAL,
                         false
                 )
+            }
+        }
+    }
+    inner class BeliveViewHolder(private val itemBinding: BeliveProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(beliveProduct: BeliveProduct){
+            itemBinding.bProduct.run{
+                setHasFixedSize(true)
+                adapter = BeliveAdapter(context, beliveProduct.bproducts)
+                layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
             }
         }
     }

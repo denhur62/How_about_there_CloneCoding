@@ -9,9 +9,10 @@ object RecyclerViewType {
     const val RECENTLY_PRODUCT_TYPE=5
     const val SPECIAL_PRODUCT_TYPE=6
     const val RECOMMEND_PRODUCT_TYPE=7
-    const val MAGAZINE_TYPE=8
-    const val EXPLAIN_TYPE=9
+    const val BLACK_TYPE=8
+    const val MAGAZINE_TYPE=9
+    const val BELIVE_TYPE=10
+    const val EXPLAIN_TYPE=11
 
-    const val LIGHTNING_PRODUCT_TYPE=10
 
 }

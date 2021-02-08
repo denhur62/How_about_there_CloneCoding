@@ -84,7 +84,19 @@ import java.util.ArrayList
              MProduct(R.drawable.m6)
      ))
      anyProducts.add(magazineList)
+    val beliveList=BeliveProduct(arrayListOf(
+            BProduct(R.drawable.b1,"발렌타인데이엔 초콜릿 대신 호캉스","달달한 혜택까지!","HOT","BEST"),
+            BProduct(R.drawable.b2,"둘이서 알콩달콤 발렌타인데이 보내기❤","전국 인기 추천모텔만 모았어요!","쿠폰 할인","BEST"),
+            BProduct(R.drawable.b3,"다녀온 분들이 인정하는 찐 BEST!","지금 예약하면 특가에 7%할이까지!","HOT","강력추천"),
+            BProduct(R.drawable.b4,"하얏트 설맞이 특가 20% 할인","프리미엄 호캉스를 합리적인 가격으로!","HOT","BEST"),
+            BProduct(R.drawable.b5,"히든클리프 제주에서 찐-호캉스를!","#특가 #전망Up #풀파티 #연박조식 제공","HOT","쿠폰할인"),
+            BProduct(R.drawable.b6,"특별한 날엔, 프리미엄 고급 펜션","청결, 부대시설, 룸컨디션 모두 최상급!","HOT","BEST"),
+            BProduct(R.drawable.b7,"근교 데이트로 펜캉스 어때?","커플펜션 할인 받아 체크인!","추천게하","BEST"),
+            BProduct(R.drawable.b8,"인기 펜션 특별할인 주간","이번 주만 무조건 10% 할인!","HOT","강력추천"),
+            BProduct(R.drawable.b9,"이 달의 특가호텔 확인하기","#지금 할인중인 #전국 인기 호텔","HOT","BEST")
+    ))
 
+     anyProducts.add(beliveList)
     anyProducts.add(CompanyProduct(1))
      return anyProducts
 }
