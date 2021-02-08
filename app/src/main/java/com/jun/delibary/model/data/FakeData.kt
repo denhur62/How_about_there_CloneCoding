@@ -62,15 +62,15 @@ import java.util.ArrayList
      anyProducts.add(spList)
 
      val reList=RecommendProduct(arrayListOf(
-         ReProduct(R.drawable.r1,"간석 파이호텔","1km","남동구 간석동","9.5","2,244",
+         ReProduct(R.drawable.r1,"간석 파이호텔","1km","남동구 간석동","9.5","(2,244)",
              "20,000원","35,000원","예약"),
-         ReProduct(R.drawable.r2,"간석 호텔버스","985m","남동구 간석동","9.5","432",
+         ReProduct(R.drawable.r2,"간석 호텔버스","985m","남동구 간석동","9.5","(432)",
              "20,000원","35,000원","예약특가","40,000"),
-         ReProduct(R.drawable.r3,"구월동 구월호텔","2,2km","남동구 구월동","9.5","3,993",
+         ReProduct(R.drawable.r3,"구월동 구월호텔","2,2km","남동구 구월동","9.5","(3,993)",
              "25,000원","50,000원","예약"),
-         ReProduct(R.drawable.r4,"동암 베네","2.2km","부평구 십정동","9.3","2,760",
+         ReProduct(R.drawable.r4,"동암 베네","2.2km","부평구 십정동","9.3","(2,760)",
              "18,000원","30,000원","예약"),
-         ReProduct(R.drawable.r5,"간석 골든호텔","1.3km","남동구 간석동","9.4","2,528",
+         ReProduct(R.drawable.r5,"간석 골든호텔","1.3km","남동구 간석동","9.4","(2,528)",
              "25,000원","50,000원","예약특가","60,000"),
      ))
      anyProducts.add(reList)

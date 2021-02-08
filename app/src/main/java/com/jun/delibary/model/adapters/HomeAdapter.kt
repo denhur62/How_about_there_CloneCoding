@@ -2,72 +2,78 @@ package com.jun.delibary.model.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.jun.delibary.view.EventActivity
 import com.jun.delibary.R
+import com.jun.delibary.databinding.*
+import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_THREE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.EXPLAIN_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.ICON_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.MAGAZINE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.RECENTLY_PRODUCT_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.RECOMMEND_PRODUCT_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.SLIDE_TYPE
-import com.jun.delibary.model.adapters.RecyclerViewType.TEXT_TYPE
-import com.jun.delibary.databinding.*
-import com.jun.delibary.model.adapters.RecyclerViewType.COUPON_THREE_TYPE
 import com.jun.delibary.model.adapters.RecyclerViewType.SPECIAL_PRODUCT_TYPE
+import com.jun.delibary.model.adapters.RecyclerViewType.TEXT_TYPE
 import com.jun.delibary.model.data.*
+import com.jun.delibary.view.EventActivity
 import java.util.*
 
-class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context,private val recyclerView:RecyclerView) :
+
+class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Context, private val recyclerView: RecyclerView) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
-            RECENTLY_PRODUCT_TYPE-> {
-                val itemBinding=SingleRecentlyProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            RECENTLY_PRODUCT_TYPE -> {
+                val itemBinding = SingleRecentlyProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 SingleViewHolder(itemBinding)
             }
-            SLIDE_TYPE-> {
-                val itemBinding= SingleSlideBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-                 MainSliderViewHolder(itemBinding)
+            SLIDE_TYPE -> {
+                val itemBinding = SingleSlideBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                MainSliderViewHolder(itemBinding)
             }
-            TEXT_TYPE-> {
-                val itemBinding= MainBennerBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            TEXT_TYPE -> {
+                val itemBinding = MainBennerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 BannerNameViewHolder(itemBinding)
             }
-            ICON_TYPE-> {
-                val itemBinding= SingleIconProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            ICON_TYPE -> {
+                val itemBinding = SingleIconProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 IconViewHodler(itemBinding)
             }
-            COUPON_TYPE-> {
-                val itemBinding= SingleCouponProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            COUPON_TYPE -> {
+                val itemBinding = SingleCouponProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 CouponViewHodler(itemBinding)
             }
-            COUPON_THREE_TYPE ->{
-                val itemBinding= ThreeCouponProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            COUPON_THREE_TYPE -> {
+                val itemBinding = ThreeCouponProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 ThreeCouponViewHodler(itemBinding)
             }
-            SPECIAL_PRODUCT_TYPE->{
-                val itemBinding= SpecialPriceProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            SPECIAL_PRODUCT_TYPE -> {
+                val itemBinding = SpecialPriceProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 SpecialPriceViewHolder(itemBinding)
             }
             MAGAZINE_TYPE -> {
-                val itemBinding= SingleMagazineProductBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+                val itemBinding = SingleMagazineProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 MagazineViewHolder(itemBinding)
             }
-            EXPLAIN_TYPE-> {
-                val itemBinding= CompanyExplainBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            EXPLAIN_TYPE -> {
+                val itemBinding = CompanyExplainBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 CompanyViewHolder(itemBinding)
+            }
+            RECOMMEND_PRODUCT_TYPE ->{
+                val itemBinding = RecommendProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                RecommendViewHolder(itemBinding)
             }
             else -> throw RuntimeException("View Error")
         }
@@ -86,26 +92,29 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is MainSlide -> {
                 (holder as MainSliderViewHolder).bind(obj as MainSlide)
             }
-            is BannerText ->{
+            is BannerText -> {
                 (holder as BannerNameViewHolder).bind(obj as BannerText)
             }
-            is IconProduct ->{
+            is IconProduct -> {
                 (holder as IconViewHodler).bind(obj as IconProduct)
             }
-            is CouponProduct ->{
+            is CouponProduct -> {
                 (holder as CouponViewHodler).bind(obj as CouponProduct)
             }
-            is CompanyProduct ->{
+            is CompanyProduct -> {
                 (holder as CompanyViewHolder).bind(obj as CompanyProduct)
             }
-            is MagazineProduct ->{
+            is MagazineProduct -> {
                 (holder as MagazineViewHolder).bind(obj as MagazineProduct)
             }
-            is ThreeCouponProduct ->{
+            is ThreeCouponProduct -> {
                 (holder as ThreeCouponViewHodler).bind()
             }
-            is SpecialPriceProduct ->{
+            is SpecialPriceProduct -> {
                 (holder as SpecialPriceViewHolder).bind(obj as SpecialPriceProduct)
+            }
+            is RecommendProduct ->{
+                (holder as RecommendViewHolder).bind(obj as RecommendProduct)
             }
             else -> throw RuntimeException("Bind Error")
         }
@@ -122,6 +131,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             is MagazineProduct -> MAGAZINE_TYPE
             is ThreeCouponProduct -> COUPON_THREE_TYPE
             is SpecialPriceProduct -> SPECIAL_PRODUCT_TYPE
+            is RecommendProduct -> RECOMMEND_PRODUCT_TYPE
             else-> throw RuntimeException("getItemViewType")
         }
     }
@@ -130,12 +140,11 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
             //아이템이 변경하지 않을것을 명시하여 성능하락 방지 == setHasFixedSize
             itemBinding.rvChapters.run{
                 setHasFixedSize(true)
-                adapter = recentlyProduct.RProducts.let { RProductAdapter(context, it){
-                        RProduct->
+                adapter = RProductAdapter(context, recentlyProduct.RProducts){ RProduct->
                     val intent = Intent(context, EventActivity::class.java)
-                    intent.putExtra("recentlyEvent","${RProduct.imageUrl}")
+                    intent.putExtra("recentlyEvent", "${RProduct.imageUrl}")
                     context.startActivity(intent)
-                } }
+                }
                 layoutManager = LinearLayoutManager(
                         context,
                         LinearLayoutManager.HORIZONTAL,
@@ -150,7 +159,7 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         fun bind(mainSlide: MainSlide){
             itemBinding.tvAll.setOnClickListener{
                 val intent = Intent(context, EventActivity::class.java)
-                intent.putExtra("eventAll","전체보기")
+                intent.putExtra("eventAll", "전체보기")
                 context.startActivity(intent)
                 }
             itemBinding.mainViewPager.run{
@@ -158,15 +167,14 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
                 if(flag){
                     flag=false
                     autoScroll(mainSlide.list)
-                    infiniteScroll(mainSlide.list,itemBinding)
+                    infiniteScroll(mainSlide.list, itemBinding)
                     // 기본값\
                     setCurrentItem(1, false)
                     orientation=this.orientation
 
-                    adapter = mainSlide.list.let { MainSliderAdapter(context, it){
-                            MainSlideProduct,position->
+                    adapter = mainSlide.list.let { MainSliderAdapter(context, it){ MainSlideProduct, position->
                         val intent = Intent(context, EventActivity::class.java)
-                        intent.putExtra("slideEvent","$position")
+                        intent.putExtra("slideEvent", "$position")
                         context.startActivity(intent)
                     } }
 
@@ -185,8 +193,8 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         fun bind(iconProduct: IconProduct){
             itemBinding.rvIcon.run{
                 setHasFixedSize(true)
-                adapter = iconProduct.IProducts.let { IProductAdapter(context, it) }
-                layoutManager = GridLayoutManager(context,4)
+                adapter = IProductAdapter(context, iconProduct.IProducts)
+                layoutManager = GridLayoutManager(context, 4)
                    
             }
         }
@@ -209,11 +217,24 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         fun bind(spproduct: SpecialPriceProduct){
             itemBinding.rvSpProduct.run{
                 setHasFixedSize(true)
-                adapter = spproduct.SPProducts.let { SPAdapter(context, it) }
+                adapter = SPAdapter(context, spproduct.SPProducts)
                 layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                )
+            }
+        }
+    }
+    inner class RecommendViewHolder(private val itemBinding: RecommendProductBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+        fun bind(reProduct: RecommendProduct){
+            itemBinding.rvReProduct.run{
+                setHasFixedSize(true)
+                adapter = REAdapter(context, reProduct.ReProducts)
+                layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
                 )
             }
         }
@@ -222,11 +243,11 @@ class HomeAdapter(private val itemList: ArrayList<Any>, private val context: Con
         fun bind(magazineProduct: MagazineProduct){
             itemBinding.rvIcon.run{
                 setHasFixedSize(true)
-                adapter = magazineProduct.MProducts.let { MagazineAdapter(context, it) }
+                adapter = MagazineAdapter(context, magazineProduct.MProducts)
                 layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
                 )
             }
             itemBinding.tvSubjectName.text = magazineProduct.subjectName

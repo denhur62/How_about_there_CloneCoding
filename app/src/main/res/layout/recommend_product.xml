@@ -11,12 +11,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/lightyellow">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp">
 
         <TextView
-            android:id="@+id/tv_special_price"
+            android:id="@+id/tv_recommend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -26,39 +25,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tv_special_price2"
-            android:text="반짝특가"/>
-
-
-        <ImageView
-            android:id="@+id/lightning"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            app:layout_constraintStart_toEndOf="@+id/tv_special_price"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/ic_lightning" />
-
+            android:text="내주변 추천 모텔"/>
         <TextView
-            android:id="@+id/tv_special_price2"
+            android:id="@+id/tv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="3dp"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_special_price"
-            android:text="마감주의! #선착순 호텔특가" />
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:text="전체 보기"
+            android:textColor="@color/teal_700"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_sp_product"
+            android:id="@+id/rv_re_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:clipToPadding="false"
             android:paddingEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_special_price2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_recommend" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
